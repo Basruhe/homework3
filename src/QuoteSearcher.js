@@ -120,8 +120,8 @@ export default class QuoteSearcher extends Component {
   }
 }
 
+// Current step: Rendering found quotes (after searching) on the page. Replace old quotes?
 // Current problem: found quotes not passed to state
 
 // TODO:
-// Render foundquotes (after searching) on the page. Replace old quotes?
 // pass 'key' property
