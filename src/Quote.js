@@ -3,13 +3,13 @@ import PropTypes from "prop-types";
 
 export default class Quote extends Component {
   static propTypes = {
-    _id: PropTypes.number.isRequired,
+    // _id: PropTypes.number.isRequired,
     quoteText: PropTypes.string.isRequired,
     quoteAuthor: PropTypes.string.isRequired
   };
 
   render() {
-    console.log(this.props);
+    // console.log("Prop test", this.props);
     return (
       <div>
         <p>{this.props.quoteText}</p>

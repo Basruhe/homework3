@@ -9,7 +9,9 @@ export default class QuoteSearcher extends Component {
     // quoteAuthor: PropTypes.string.isRequired
   };
   state = {
-    quotes: []
+    quotes: [],
+    fetching: true,
+    error: false
   };
 
   componentDidMount() {
@@ -22,12 +24,18 @@ export default class QuoteSearcher extends Component {
         console.log("quote objects from the data", fetchedQuotes);
         this.updatingQuotes(fetchedQuotes);
       })
-      .catch(console.error);
+      // .catch(console.error);
+      .catch(error =>
+        this.setState({
+          error: true
+        })
+      );
   }
 
   updatingQuotes(fetchedQuotes) {
     this.setState({
-      quotes: fetchedQuotes
+      quotes: fetchedQuotes,
+      fetching: false
     });
     console.log("logging state", this.state.quotes);
   }
@@ -42,26 +50,39 @@ export default class QuoteSearcher extends Component {
     const quotesCopy = [...this.state.quotes];
     console.log("checking content of state copy: ", quotesCopy);
     // this.state.quotes.map(quote.render);
-    return (
-      <div>
-        <h2>Quotes</h2>
-        <p>{quotesCopy.map(this.renderQuote)}</p>
-      </div>
-    );
+    if (this.state.error === true) {
+      return (
+        <p>
+          Error: unable to aquire data from server. Please check the console log
+          in your developer tools for more information. Happy fixing
+        </p>
+      );
+    } else if (this.state.fetching === false) {
+      return (
+        <div>
+          <h2>Quotes</h2>
+          {quotesCopy.map(this.renderQuote)}
+        </div>
+      );
+    } else if (this.state.fetching) {
+      return <p>Fetching data from server... Please wait</p>;
+    }
   }
 }
 
-// Now, let's make the `QuoteSearcher` component dynamically fetch qutoes from the API. We will be using the "search" endpoint at `https://quote-garden.herokuapp.com/quotes/search/:keyword`. For example, here are the results for "tree": https://quote-garden.herokuapp.com/quotes/search/tree.
+// TODO: pass 'key' property
+
+// Instructions
+// ### Step 4. Add a "like" / "dislike" feature to the quotes
 // ​
-// - Change the initial state of the `QuoteSearcher` component to have an empty list of quotes. That is,
+// You might like some quotes and dislike others. We're going to add a feature that records whether you do or do not. For this step, we've going to keep the state local to the `Quote` component.
 // ​
-//   ```ts
-//   state = {
-//     quotes: []
-//   }
-//   ```
+// - Add two `<button>`s, for example `:)` and `:(` or `like` and `dislike`, so that the page looks like this:
 // ​
-// - Add the `componentDidMount` lifecycle method to the component, and in it add a `fetch` call to https://quote-garden.herokuapp.com/quotes/search/tree, to fetch all the quotes that contain the keyword "tree".
-// - When the data arrives, assign it (correctly) to component local state, so that the component automatically rerenders and displays all the found qoutes.
-// - Add an extra (boolean) state property called `fetching`, and (re-)assign it as necessary in `componentDidMount` so that the component knows when it is fetching data.
-// - In the `render()` method, use that state property to conditionally show a "Loading..." text instead of the quotes when fetching. The result may look something like this:
+//   ![](https://p18.f3.n0.cdn.getcloudapp.com/items/04uk2vJO/Image+2019-10-24+at+10.04.48+PM.png)
+// ​
+// - By using a new property in component local state, and the `onClick` attribute of the buttons, make it so that a user can like or dislike a quote. This liking or disliking should change the way the quote looks. For example, you can use the `style` attribute, and conditionally apply some CSS styles, like so: `style={{ fontWeight: "bold" }}`.
+// - The result may look something like this:
+// ​
+//   ![](https://p18.f3.n0.cdn.getcloudapp.com/items/wbue6LqB/Screen+Recording+2019-10-24+at+10.12+PM.gif)
+// ​
