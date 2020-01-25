@@ -11,7 +11,8 @@ export default class QuoteSearcher extends Component {
   state = {
     quotes: [],
     fetching: true,
-    error: false
+    error: false,
+    query: null
   };
 
   componentDidMount() {
@@ -46,6 +47,48 @@ export default class QuoteSearcher extends Component {
     );
   };
 
+  // render() {
+  //   const quotesCopy = [...this.state.quotes];
+  //   console.log("checking content of state copy: ", quotesCopy);
+  //   // this.state.quotes.map(quote.render);
+  //   if (this.state.error === true) {
+  //     return (
+  //       <p>
+  //         Error: unable to aquire data from server. Please check the console log
+  //         in your developer tools for more information. Happy fixing
+  //       </p>
+  //     );
+  //   } else if (this.state.fetching === false) {
+  //     return (
+  //       <div>
+  //         <br></br>
+  //         <h2>Quotes</h2>
+  //         {quotesCopy.map(this.renderQuote)}
+  //       </div>
+  //     );
+  //   } else if (this.state.fetching) {
+  //     return <p>Fetching data from server... Please wait</p>;
+  //   }
+  // }
+
+  inputChange = event => {
+    event.preventDefault();
+    console.log("Testing current form input:", this.state);
+    this.setState({
+      query: event.target.value
+    });
+  };
+
+  // submitSearch = () => {
+  //   return this.state.
+  // }
+
+  searchOutput = () => {
+    return this.state.results.map((quote, index) => {
+      return <li key={index}>{quote.value}</li>;
+    });
+  };
+
   render() {
     const quotesCopy = [...this.state.quotes];
     console.log("checking content of state copy: ", quotesCopy);
@@ -60,6 +103,15 @@ export default class QuoteSearcher extends Component {
     } else if (this.state.fetching === false) {
       return (
         <div>
+          <br></br>
+          <form onSubmit={this.submitSearch}>
+            <input
+              placeholder="Search for quotes here!"
+              value={this.state.query}
+              onChange={this.inputChange}
+            ></input>
+          </form>
+          <br></br>
           <h2>Quotes</h2>
           {quotesCopy.map(this.renderQuote)}
         </div>
@@ -71,3 +123,5 @@ export default class QuoteSearcher extends Component {
 }
 
 // TODO: pass 'key' property
+// optional:
+// CSS for margins on form, quotes, buttons

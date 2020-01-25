@@ -29,7 +29,6 @@ export default class Quote extends Component {
   render() {
     // console.log("Prop test", this.props);
     let likeColors = this.state.likeitornot ? "bluequote" : "redquote";
-    console.log("huh", likeColors);
     return (
       <div>
         <p className={likeColors}>{this.props.quoteText}</p>
@@ -44,5 +43,5 @@ export default class Quote extends Component {
 }
 
 // Todo:
-// Page starts with coloured quotes. Fix this
+// Page starts with coloured quotes when the state is 'null'. Null is treated as a boolean? Fix this
 // Repeated button clicks result in 'null' states. Why?
