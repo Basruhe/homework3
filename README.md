@@ -1,3 +1,8 @@
+Homework assignment reflection:
+
+I took it very slow and took very small steps this time. I was working on the search function when I ran out of time. I left in some TODO notes to structure my work process.
+
+////
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
