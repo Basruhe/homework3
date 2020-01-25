@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import QuoteSearcher from "./QuoteSearcher";
+import Quote from "./Quote";
 
 function App() {
   return (
