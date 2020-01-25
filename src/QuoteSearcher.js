@@ -41,12 +41,14 @@ export default class QuoteSearcher extends Component {
   // todo: render function that maps this.state.quotes over quote.render. add return. then add quotesearcher to app.js
 
   renderQuote = quote => {
-    return <Quote text={this.quoteText} author={this.quoteAuthor} />;
+    return (
+      <Quote quoteText={quote.quoteText} quoteAuthor={quote.quoteAuthor} />
+    );
   };
 
   render() {
     const quotesCopy = [...this.state.quotes];
-    console.log("checking state copy: ", quotesCopy);
+    console.log("checking content of state copy: ", quotesCopy);
     // this.state.quotes.map(quote.render);
     return (
       <div>
@@ -56,28 +58,3 @@ export default class QuoteSearcher extends Component {
     );
   }
 }
-
-// render() {
-//   console.log("render of scoreboard: ", this.state);
-//   const players_copy = [...this.state.players];
-//   players_copy.sort((a, b) => b.score - a.score);
-
-//   return (
-//     <div className="scoreboard">
-//       <h1>Scoreboard</h1>
-//       <ul>{players_copy.map(this.renderPlayer)}</ul>
-//     </div>
-//   );
-// }
-
-// renderPlayer = player => {
-//   return (
-//     <Player
-//       id={player.id}
-//       name={player.name}
-//       score={player.score}
-//       key={player.id}
-//       incrementScore={this.IncrementScoreOfPlayer}
-//     />
-//   );
-// };

@@ -7,7 +7,6 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
-        <p>File initiation Test</p>
         <QuoteSearcher />
       </div>
     );
