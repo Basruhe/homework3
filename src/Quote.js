@@ -4,7 +4,6 @@ import style from "./styles/style.css";
 
 export default class Quote extends Component {
   static propTypes = {
-    // _id: PropTypes.number.isRequired,
     quoteText: PropTypes.string.isRequired,
     quoteAuthor: PropTypes.string.isRequired
   };
@@ -43,5 +42,6 @@ export default class Quote extends Component {
 }
 
 // Todo:
-// Page starts with coloured quotes when the state is 'null'. Null is treated as a boolean? Fix this
-// Repeated button clicks result in 'null' states. Why?
+// Add ID proptype, key property?
+// Page starts with coloured quotes when the state is 'null'. Null is treated as a boolean? Requires fix
+// Repeated button clicks result in 'null' states. Requires fix
