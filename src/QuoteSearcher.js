@@ -9,36 +9,28 @@ export default class QuoteSearcher extends Component {
     // quoteAuthor: PropTypes.string.isRequired
   };
   state = {
-    quotes: [
-      {
-        _id: "5d91b45d9980192a317c87f3",
-        quoteText: "Doing nothing is better than being busy doing nothing.",
-        quoteAuthor: "Lao Tzu"
-      },
-      {
-        _id: "5d91b45d9980192a317c87fa",
-        quoteText: "Work out your own salvation. Do not depend on others.",
-        quoteAuthor: "Buddha"
-      },
-      {
-        _id: "5d91b45d9980192a317c880c",
-        quoteText: "A goal without a plan is just a wish.",
-        quoteAuthor: "Larry Elder"
-      },
-      {
-        _id: "5d91b45d9980192a317c87de",
-        quoteText: "Difficulties increase the nearer we get to the goal.",
-        quoteAuthor: "Johann Wolfgang von Goethe"
-      },
-      {
-        _id: "5d91b45d9980192a317c87f8",
-        quoteText: "Well done is better than well said.",
-        quoteAuthor: "Benjamin Franklin"
-      }
-    ]
+    quotes: []
   };
 
-  // todo: render function that maps this.state.quotes over quote.render. add return. then add quotesearcher to app.js
+  componentDidMount() {
+    fetch("https://quote-garden.herokuapp.com/quotes/search/tree")
+      .then(results => results.json())
+      .then(myJson => {
+        const quoteData = myJson;
+        console.log("logging raw quoteData", quoteData);
+        const fetchedQuotes = quoteData.results;
+        console.log("quote objects from the data", fetchedQuotes);
+        this.updatingQuotes(fetchedQuotes);
+      })
+      .catch(console.error);
+  }
+
+  updatingQuotes(fetchedQuotes) {
+    this.setState({
+      quotes: fetchedQuotes
+    });
+    console.log("logging state", this.state.quotes);
+  }
 
   renderQuote = quote => {
     return (
@@ -58,3 +50,18 @@ export default class QuoteSearcher extends Component {
     );
   }
 }
+
+// Now, let's make the `QuoteSearcher` component dynamically fetch qutoes from the API. We will be using the "search" endpoint at `https://quote-garden.herokuapp.com/quotes/search/:keyword`. For example, here are the results for "tree": https://quote-garden.herokuapp.com/quotes/search/tree.
+// ​
+// - Change the initial state of the `QuoteSearcher` component to have an empty list of quotes. That is,
+// ​
+//   ```ts
+//   state = {
+//     quotes: []
+//   }
+//   ```
+// ​
+// - Add the `componentDidMount` lifecycle method to the component, and in it add a `fetch` call to https://quote-garden.herokuapp.com/quotes/search/tree, to fetch all the quotes that contain the keyword "tree".
+// - When the data arrives, assign it (correctly) to component local state, so that the component automatically rerenders and displays all the found qoutes.
+// - Add an extra (boolean) state property called `fetching`, and (re-)assign it as necessary in `componentDidMount` so that the component knows when it is fetching data.
+// - In the `render()` method, use that state property to conditionally show a "Loading..." text instead of the quotes when fetching. The result may look something like this:
