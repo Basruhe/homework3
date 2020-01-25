@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import QuoteSearcher from "./QuoteSearcher";
 import PropTypes from "prop-types";
 
 export default class Quote extends Component {
@@ -10,11 +9,11 @@ export default class Quote extends Component {
   };
 
   render() {
+    console.log(this.props);
     return (
       <div>
-        <h2>Quotes</h2>
-        <p>{this.props.text}</p>
-        <p>By: {this.props.author}</p>
+        <p>{this.props.quoteText}</p>
+        <p>By: {this.props.quoteAuthor}</p>
       </div>
     );
   }

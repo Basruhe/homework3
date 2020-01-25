@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
+import Quote from "./Quote";
 
 export default class QuoteSearcher extends Component {
   static propTypes = {
-    _id: PropTypes.number.isRequired,
-    quoteText: PropTypes.string.isRequired,
-    quoteAuthor: PropTypes.string.isRequired
+    // _id: PropTypes.number.isRequired,
+    // quoteText: PropTypes.string.isRequired,
+    // quoteAuthor: PropTypes.string.isRequired
   };
   state = {
     quotes: [
@@ -33,97 +34,50 @@ export default class QuoteSearcher extends Component {
         _id: "5d91b45d9980192a317c87f8",
         quoteText: "Well done is better than well said.",
         quoteAuthor: "Benjamin Franklin"
-      },
-      {
-        _id: "5d91b45d9980192a317c87fc",
-        quoteText: "Once you choose hope, anythings possible.",
-        quoteAuthor: "Christopher Reeve"
-      },
-      {
-        _id: "5d91b45d9980192a317c87ff",
-        quoteText: "From small beginnings come great things.",
-        quoteAuthor: ""
-      },
-      {
-        _id: "5d91b45d9980192a317c8814",
-        quoteText: "Love is the flower you've got to let grow.",
-        quoteAuthor: "John Lennon"
-      },
-      {
-        _id: "5d91b45d9980192a317c87f0",
-        quoteText: "A rolling stone gathers no moss.",
-        quoteAuthor: "Publilius Syrus"
-      },
-      {
-        _id: "5d91b45d9980192a317c87f9",
-        quoteText: "Bite off more than you can chew, then chew it.",
-        quoteAuthor: "Ella Williams"
-      },
-      {
-        _id: "5d91b45d9980192a317c8806",
-        quoteText: "Goals are the fuel in the furnace of achievement.",
-        quoteAuthor: "Brian Tracy"
-      },
-      {
-        _id: "5d91b45d9980192a317c87dc",
-        quoteText: "You can observe a lot just by watching.",
-        quoteAuthor: "Yogi Berra"
-      },
-      {
-        _id: "5d91b45d9980192a317c87f6",
-        quoteText: "The day is already blessed, find peace within it.",
-        quoteAuthor: ""
-      },
-      {
-        _id: "5d91b45d9980192a317c87e2",
-        quoteText: "Well begun is half done.",
-        quoteAuthor: "Aristotle"
-      },
-      {
-        _id: "5d91b45d9980192a317c87e1",
-        quoteText: "Nothing happens unless first we dream.",
-        quoteAuthor: "Carl Sandburg"
-      },
-      {
-        _id: "5d91b45d9980192a317c87ed",
-        quoteText: "To lead people walk behind them.",
-        quoteAuthor: "Lao Tzu"
-      },
-      {
-        _id: "5d91b45d9980192a317c8809",
-        quoteText: "Talk doesn't cook rice.",
-        quoteAuthor: "Chinese proverb"
-      },
-      {
-        _id: "5d91b45d9980192a317c87e9",
-        quoteText: "You'll see it when you believe it.",
-        quoteAuthor: "Wayne Dyer"
-      },
-      {
-        _id: "5d91b45d9980192a317c8808",
-        quoteText: "Be kind whenever possible. It is always possible.",
-        quoteAuthor: "Dalai Lama"
-      },
-      {
-        _id: "5d91b45d9980192a317c880d",
-        quoteText: "To succeed, we must first believe that we can.",
-        quoteAuthor: "Michael Korda"
-      },
-      {
-        _id: "5d91b45d9980192a317c8816",
-        quoteText: "One fails forward toward success.",
-        quoteAuthor: "Charles Kettering"
-      },
-      {
-        _id: "5d91b45d9980192a317c87f5",
-        quoteText: "Study the past, if you would divine the future.",
-        quoteAuthor: "Confucius"
-      },
-      {
-        _id: "5d91b45d9980192a317c8804",
-        quoteText: "What worries you masters you.",
-        quoteAuthor: "Haddon Robinson"
       }
     ]
   };
+
+  // todo: render function that maps this.state.quotes over quote.render. add return. then add quotesearcher to app.js
+
+  renderQuote = quote => {
+    return <Quote text={this.quoteText} author={this.quoteAuthor} />;
+  };
+
+  render() {
+    const quotesCopy = [...this.state.quotes];
+    console.log("checking state copy: ", quotesCopy);
+    // this.state.quotes.map(quote.render);
+    return (
+      <div>
+        <h2>Quotes</h2>
+        <p>{quotesCopy.map(this.renderQuote)}</p>
+      </div>
+    );
+  }
 }
+
+// render() {
+//   console.log("render of scoreboard: ", this.state);
+//   const players_copy = [...this.state.players];
+//   players_copy.sort((a, b) => b.score - a.score);
+
+//   return (
+//     <div className="scoreboard">
+//       <h1>Scoreboard</h1>
+//       <ul>{players_copy.map(this.renderPlayer)}</ul>
+//     </div>
+//   );
+// }
+
+// renderPlayer = player => {
+//   return (
+//     <Player
+//       id={player.id}
+//       name={player.name}
+//       score={player.score}
+//       key={player.id}
+//       incrementScore={this.IncrementScoreOfPlayer}
+//     />
+//   );
+// };
